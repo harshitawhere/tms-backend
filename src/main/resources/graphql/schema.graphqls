@@ -1,0 +1,88 @@
+enum Role {
+  ADMIN
+  EMPLOYEE
+}
+
+type Shipment {
+  id: ID!
+  shipmentNumber: String!
+  origin: String!
+  destination: String!
+  status: String!
+  carrier: String!
+  weight: Float!
+  createdAt: String!
+}
+
+type Employee {
+  id: ID!
+  name: String!
+  age: Int!
+  role: Role!
+  className: String
+  subjects: [String]
+  attendance: Int
+}
+
+type EmployeePage {
+  data: [Employee!]!
+  totalCount: Int!
+}
+
+type ShipmentPage {
+  data: [Shipment!]!
+  totalCount: Int!
+}
+
+input ShipmentFilter {
+  status: String
+  origin: String
+}
+
+input SortInput {
+  field: String
+  direction: String
+}
+
+type Query {
+ shipments(
+  page: Int!
+  size: Int!
+  status: String
+  origin: String
+  sortField: String
+  sortDir: String
+): ShipmentPage!
+
+  employees(
+    page: Int!
+    size: Int!
+    name: String
+    className: String
+    sortField: String
+    sortDir: String
+  ): EmployeePage!
+
+  employee(id: ID!): Employee
+
+  shipment(id: ID!): Shipment
+}
+
+type Mutation {
+  addShipment(
+    shipmentNumber: String!
+    origin: String!
+    destination: String!
+    status: String!
+    carrier: String!
+    weight: Float!
+  ): Shipment!
+
+  updateShipment(
+    id: ID!
+    status: String
+    carrier: String
+  ): Shipment!
+
+  deleteShipment(id: ID!): Boolean!
+}

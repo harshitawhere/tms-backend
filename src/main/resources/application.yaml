@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: tms-backend
+  graphql:
+    graphiql:
+      enabled: true
+      path: /graphiql
+  jpa:
+    packages-to-scan: com.tms.model
+
+logging:
+  level:
+    org.springframework.security: DEBUG
+
